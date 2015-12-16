@@ -8,6 +8,4 @@ fordata3 = FOREACH raw_data3 GENERATE ToDate(date,'M/dd/yy') as date3,indexPCRat
 join_data1 = join fordata1 by date1, fordata2 by date2,fordata3 by date3;
 
 forEachData = FOREACH join_data1 GENERATE date1,((((spPCRatio+viPCRatio+indexPCRatio)/3)/2)*100) as volatilityIndex;
-
-
 STORE forEachData into '/Users/ukothan/Documents/workspace-assignment/StockMarketAnalysis/BigData/pigOutput/fearAndGreed' using PigStorage(',');
